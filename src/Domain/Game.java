@@ -8,7 +8,7 @@ public class Game {
     private String team1;
     private String team2;
     private String leagueId;
-    private ArrayList<Integer> score;
+    private Pair score;
     private LocalDateTime date;
     private ArrayList<Referee> referees;
     private String field;
@@ -66,14 +66,14 @@ public class Game {
         this.leagueId = leagueId;
     }
 
-    public ArrayList<Integer> getScore()
+    public Pair getScore()
     {
         return score;
     }
 
-    public void setScore(ArrayList<Integer> score)
+    public void setScore(int scoreTeamOne, int scoreTeamTwo)
     {
-        this.score = score;
+        this.score = new Pair(scoreTeamOne, scoreTeamTwo);
     }
 
     public LocalDateTime getDate()
