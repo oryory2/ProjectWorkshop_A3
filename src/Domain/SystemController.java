@@ -7,18 +7,18 @@ public class SystemController
 
     }
 
-    public void loginUser(String userID, String password)
+    public boolean loginUser(String userID, String password)
     {
-
+        return true;
     }
 
-    public void addReferee(String name, String qualification, String leagueId)
+    public boolean addReferee(String name, String qualification, String leagueId)
     {
-
+        return true;
     }
 
-    public void assignGame(String gameId, String teamOne, String teamTwo, String leagueIdOfTheGame, String dateAndTime, String referees, String field)
+    public boolean assignGame(String gameId, String teamOne, String teamTwo, String leagueIdOfTheGame, String dateAndTime, String referees, String field)
     {
-
+        return true;
     }
 }
