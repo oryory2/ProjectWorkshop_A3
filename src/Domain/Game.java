@@ -32,9 +32,16 @@ public class Game {
         return gameId;
     }
 
-    public void setGameId(String gameId)
+    public boolean setGameId(String gameId)
     {
+        if(gameId == null)
+            return false;
+
+        // should we check if there is already a game with this gameId
+        // should we check those functions at all? we are not going to use them in this Assigment............
+
         this.gameId = gameId;
+        return true;
     }
 
     public String getTeam1()
@@ -42,9 +49,18 @@ public class Game {
         return team1;
     }
 
-    public void setTeam1(String team1)
+    public boolean setTeam1(String team1)
     {
+        if(team1 == null)
+            return false;
+
+        if(team2 != null)
+        {
+            if(team2.equals(team1))
+                return false;
+        }
         this.team1 = team1;
+        return true;
     }
 
     public String getTeam2()
@@ -52,9 +68,18 @@ public class Game {
         return team2;
     }
 
-    public void setTeam2(String team2)
+    public boolean setTeam2(String team2)
     {
+        if(team2 == null)
+            return false;
+
+        if(team1 != null)
+        {
+            if(team2.equals(team1))
+                return false;
+        }
         this.team2 = team2;
+        return true;
     }
 
     public String getLeagueId()
@@ -62,9 +87,14 @@ public class Game {
         return leagueId;
     }
 
-    public void setLeagueId(String leagueId)
+    public boolean setLeagueId(String leagueId)
     {
+        if(leagueId == null)
+            return false;
+        // should we check if there is an existing League with this  this leagueId
+
         this.leagueId = leagueId;
+        return true;
     }
 
     public Pair getScore()
@@ -72,9 +102,15 @@ public class Game {
         return score;
     }
 
-    public void setScore(int scoreTeamOne, int scoreTeamTwo)
+    public boolean setScore(int scoreTeamOne, int scoreTeamTwo)
     {
+        if((scoreTeamOne < 0) || (scoreTeamTwo < 0))
+        {
+            return false;
+        }
+
         this.score = new Pair(scoreTeamOne, scoreTeamTwo);
+        return true;
     }
 
     public LocalDateTime getDate()
@@ -92,9 +128,13 @@ public class Game {
         return referees;
     }
 
-    public void setReferees(ArrayList<Referee> referees)
+    public boolean setReferees(ArrayList<Referee> referees)
     {
+        if(referees == null)
+            return false;
+
         this.referees = referees;
+        return true;
     }
 
     public String getField()
@@ -102,9 +142,13 @@ public class Game {
         return field;
     }
 
-    public void setField(String field)
+    public boolean setField(String field)
     {
+        if(field == null)
+            return false;
+
         this.field = field;
+        return true;
     }
 
 }
