@@ -1,8 +1,13 @@
+import UserInterface.UserInterface;
 
 public class Main
 {
+    public UserInterface ui;
+
+
     public static void main(String[] args)
     {
-        System.out.println("gg");
+        UserInterface ui = new UserInterface();
+        ui.runMenu();
     }
 }
