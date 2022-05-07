@@ -1,6 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+*.class
 # Datasource local storage ignored files
 /../../../../../../:\Users\אור\IdeaProjects\ProjectWorkshop_A3\.idea/dataSources/
 /dataSources.local.xml
