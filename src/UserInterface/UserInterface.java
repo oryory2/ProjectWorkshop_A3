@@ -2,6 +2,7 @@ package UserInterface;
 
 import Domain.SystemController;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserInterface
@@ -14,8 +15,7 @@ public class UserInterface
         this.systemController = new SystemController();
     }
 
-    public void runMenu()
-    {
+    public void runMenu() throws SQLException {
         boolean flag = true;
         while(flag)
         {
