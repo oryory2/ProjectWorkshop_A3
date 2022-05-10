@@ -11,10 +11,9 @@ public class DB_connector {
         return conn;
     }
 
-
     public static Connection connect() {
         try {
-            conn = DriverManager.getConnection(URL);
+            conn = DriverManager.getConnection  (URL);
 //            System.out.println(conn);
             return conn;
         } catch (SQLException e) {

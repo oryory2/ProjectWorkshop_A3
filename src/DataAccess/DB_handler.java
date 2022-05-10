@@ -2,9 +2,8 @@ package DataAccess;
 
 import DataAccess.DB_connector;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.*;
+import java.sql.*;
 
 public class DB_handler {
 
@@ -50,5 +49,34 @@ public class DB_handler {
         }
     }
 
+    public static void remove_row(String table, String column_name, String value_name){
+        try{
+            String sql = "DELETE FROM " + table + " WHERE " +column_name+ " = " + "'"+value_name+"'";
+            System.out.println(sql);
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(sql);
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Boolean checkLogin(String username, String password) throws SQLException {
+
+
+        String sql = "select username, password from login where username='"+ username +"' and password='"+ password+"'";
+        System.out.println(sql);
+        PreparedStatement pst1 = conn.prepareStatement(sql);
+        ResultSet rs = pst1.executeQuery();
+        if(rs.next()){
+            System.out.println("Username & Password are correct");
+            return true;
+
+        } else {
+            System.out.println("Username & Password are incorrect");
+            return false;
+        }
+
+    }
 
 }
