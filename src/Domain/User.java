@@ -1,11 +1,12 @@
 package Domain;
 
+// Class that represents a user
 public class User {
 
     private String userName;
     private String password;
 
-    // constructors / standard setters / getters
+    // Constructor
     public User (String iuserName, String ipassword) {
         userName=iuserName;
         password=ipassword;

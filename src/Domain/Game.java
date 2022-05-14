@@ -1,9 +1,6 @@
-
 package Domain;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
+// Class that represents a game
 public class Game {
     private String gameId;
     private Team homeTeam;
@@ -15,10 +12,8 @@ public class Game {
     private String field;
 
 
-
-
+    // Constructor
     public Game(String gameId, Team homeTeam, Team visitorTeam, League league, String dateAndTime, Referee referee, String field){
-
         this.gameId = gameId;
         this.homeTeam = homeTeam;
         this.visitorTeam = visitorTeam;
