@@ -1,5 +1,6 @@
 package Domain;
 
+// Class that represents a Team
 public class Team {
 
     private String team_name;
@@ -7,6 +8,7 @@ public class Team {
     private League league;
     private String field_name;
 
+    // Constructor
     public Team(String team_name, String team_id, League league, String field_name) {
         this.team_name = team_name;
         this.team_id = team_id;

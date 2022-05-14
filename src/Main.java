@@ -11,6 +11,7 @@ public class Main
 
     public static void main(String[] args) throws SQLException {
         UserApplication ua = new UserApplication();
+//        ua.addReferee("1", "1");
         ua.assignGame("2","1" ,"1","2022-09-02 11:13:22.002","1");
 //        UserInterface ui = new UserInterface();
 //        ui.runMenu();
