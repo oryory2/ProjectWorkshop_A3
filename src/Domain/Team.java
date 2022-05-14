@@ -3,11 +3,11 @@ package Domain;
 public class Team {
 
     private String team_name;
-    private int team_id;
+    private String team_id;
     private League league;
     private String field_name;
 
-    public Team(String team_name, int team_id, League league, String field_name) {
+    public Team(String team_name, String team_id, League league, String field_name) {
         this.team_name = team_name;
         this.team_id = team_id;
         this.league = league;
@@ -22,11 +22,11 @@ public class Team {
         this.team_name = team_name;
     }
 
-    public int getTeam_id() {
+    public String getTeam_id() {
         return team_id;
     }
 
-    public void setTeam_id(int team_id) {
+    public void setTeam_id(String team_id) {
         this.team_id = team_id;
     }
 

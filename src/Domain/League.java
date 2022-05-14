@@ -1,23 +1,23 @@
 package Domain;
 
 public class League {
-    private int league_id;
+    private String league_id;
     private String league_name;
     private String season;
-    private int number_of_teams;
+    private String number_of_teams;
 
-    public League(int league_id, String league_name, String season, int number_of_teams) {
+    public League(String league_id, String league_name, String season, String number_of_teams) {
         this.league_id = league_id;
         this.league_name = league_name;
         this.season = season;
         this.number_of_teams = number_of_teams;
     }
 
-    public int getLeague_id() {
+    public String getLeague_id() {
         return league_id;
     }
 
-    public void setLeague_id(int league_id) {
+    public void setLeague_id(String league_id) {
         this.league_id = league_id;
     }
 
@@ -37,11 +37,11 @@ public class League {
         this.season = season;
     }
 
-    public int getNumber_of_teams() {
+    public String getNumber_of_teams() {
         return number_of_teams;
     }
 
-    public void setNumber_of_teams(int number_of_teams) {
+    public void setNumber_of_teams(String number_of_teams) {
         this.number_of_teams = number_of_teams;
     }
 }

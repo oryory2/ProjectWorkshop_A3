@@ -58,6 +58,16 @@ public class DB_handler {
     }
 
 
+    public static void addGame(String homeTeam, String visitorTeam, String leagueIdOfTheGame, String dateAndTime, String referee) {
+        if (homeTeam == null || visitorTeam == null || leagueIdOfTheGame == null || dateAndTime == null || referee == null ){
+            return;
+        }
+        String[] column_names = {"game_datetime", "home_team_id", "league_id", "visitor_team_id", "referee_id"};
+        String[] values = {dateAndTime,homeTeam,leagueIdOfTheGame,visitorTeam,referee};
+        add_row("games", column_names, values);
+
+    }
+
 
 
 
@@ -104,7 +114,10 @@ public class DB_handler {
         }
     }
 
+    public static boolean existInDB(String table, String[] columns_name, String condition){
+        return get_list(table,columns_name,condition).size() >= 1 ;
 
+    }
 
     //Function to get a list of all the rows from a given table.
     // Parameter condition is the condition that comes after 'WHERE' in sql query. If no condition, enter null.
@@ -152,7 +165,7 @@ public class DB_handler {
 
 
     // Function that gets the last row that was added to a table (if the table contains an autoincrement ID)
-    public static int get_max_id_row(String table, String column_name)
+    public static String get_max_id_row(String table, String column_name)
     {
         try{
             // Builds and executes the query
@@ -166,12 +179,12 @@ public class DB_handler {
                 max_id = resultset.getInt(1);
             }
 
-            return max_id;
+            return Integer.toString(max_id);
 
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return -1;
+            return "-1";
         }
 
     }

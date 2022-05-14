@@ -2,15 +2,15 @@ package Domain;
 
 public class Referee
 {
+    private final String refereeID;
     private String name;
-    private String qualification;
     private String leagueId;
     // private ArrayList <Game> games;
 
 
-    public Referee(String name, String qualification, String leagueId) {
+    public Referee(String refereeID,String name, String leagueId) {
         this.name = name;
-        this.qualification = qualification;
+        this.refereeID = refereeID;
         this.leagueId = leagueId;
     }
 
@@ -20,14 +20,6 @@ public class Referee
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getQualification() {
-        return qualification;
-    }
-
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
     }
 
     public String getLeagueId() {

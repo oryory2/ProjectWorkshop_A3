@@ -6,149 +6,91 @@ import java.util.ArrayList;
 
 public class Game {
     private String gameId;
-    private String team1;
-    private String team2;
-    private String leagueId;
+    private Team homeTeam;
+    private Team visitorTeam;
+    private League league;
     private Pair score;
-    private LocalDateTime date;
-    private ArrayList<Referee> referees;
+    private String dateAndTime;
+    private Referee referee;
     private String field;
 
 
 
-    public Game(String gameId, String team1, String team2, String leagueId, LocalDateTime date, ArrayList<Referee> referees, String field){
+
+    public Game(String gameId, Team homeTeam, Team visitorTeam, League league, String dateAndTime, Referee referee, String field){
 
         this.gameId = gameId;
-        this.team1 = team1;
-        this.team2 = team2;
-        this.leagueId = leagueId;
-        this.date = date;
-        this.referees = referees;
+        this.homeTeam = homeTeam;
+        this.visitorTeam = visitorTeam;
+        this.league = league;
+        this.dateAndTime = dateAndTime;
+        this.referee = referee;
         this.field = field;
     }
 
-    public String getGameId()
-    {
+
+    public String getGameId() {
         return gameId;
     }
 
-    public boolean setGameId(String gameId)
-    {
-        if(gameId == null)
-            return false;
-
-        // should we check if there is already a game with this gameId
-        // should we check those functions at all? we are not going to use them in this Assigment............
-
+    public void setGameId(String gameId) {
         this.gameId = gameId;
-        return true;
     }
 
-    public String getTeam1()
-    {
-        return team1;
+    public Team getHomeTeam() {
+        return homeTeam;
     }
 
-    public boolean setTeam1(String team1)
-    {
-        if(team1 == null)
-            return false;
-
-        if(team2 != null)
-        {
-            if(team2.equals(team1))
-                return false;
-        }
-        this.team1 = team1;
-        return true;
+    public void setHomeTeam(Team homeTeam) {
+        this.homeTeam = homeTeam;
     }
 
-    public String getTeam2()
-    {
-        return team2;
+    public Team getVisitorTeam() {
+        return visitorTeam;
     }
 
-    public boolean setTeam2(String team2)
-    {
-        if(team2 == null)
-            return false;
-
-        if(team1 != null)
-        {
-            if(team2.equals(team1))
-                return false;
-        }
-        this.team2 = team2;
-        return true;
+    public void setVisitorTeam(Team visitorTeam) {
+        this.visitorTeam = visitorTeam;
     }
 
-    public String getLeagueId()
-    {
-        return leagueId;
+    public League getLeague() {
+        return league;
     }
 
-    public boolean setLeagueId(String leagueId)
-    {
-        if(leagueId == null)
-            return false;
-        // should we check if there is an existing League with this  this leagueId
-
-        this.leagueId = leagueId;
-        return true;
+    public void setLeague(League league) {
+        this.league = league;
     }
 
-    public Pair getScore()
-    {
+    public Pair getScore() {
         return score;
     }
 
-    public boolean setScore(int scoreTeamOne, int scoreTeamTwo)
-    {
-        if((scoreTeamOne < 0) || (scoreTeamTwo < 0))
-        {
-            return false;
-        }
-
-        this.score = new Pair(scoreTeamOne, scoreTeamTwo);
-        return true;
+    public void setScore(Pair score) {
+        this.score = score;
     }
 
-    public LocalDateTime getDate()
-    {
-        return date;
+
+    public String getDateAndTime() {
+        return dateAndTime;
     }
 
-    public void setDate(LocalDateTime date)
-    {
-        this.date = date;
+    public void setDateAndTime(String dateAndTime) {
+        this.dateAndTime = dateAndTime;
     }
 
-    public ArrayList<Referee> getReferees()
-    {
-        return referees;
+    public Referee getReferee() {
+        return referee;
     }
 
-    public boolean setReferees(ArrayList<Referee> referees)
-    {
-        if(referees == null)
-            return false;
-
-        this.referees = referees;
-        return true;
+    public void setReferee(Referee referee) {
+        this.referee = referee;
     }
 
-    public String getField()
-    {
+    public String getField() {
         return field;
     }
 
-    public boolean setField(String field)
-    {
-        if(field == null)
-            return false;
-
+    public void setField(String field) {
         this.field = field;
-        return true;
     }
-
 }
