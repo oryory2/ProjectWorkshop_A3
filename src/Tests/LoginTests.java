@@ -13,14 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTests extends Tests {
 
-//    UserApplication UA = new UserApplication();
 
-//    @org.junit.jupiter.api.BeforeAll
-//    static void setUp()
-//    {
-//        DB_handler.connect_DB();
-//        System.out.println("DB is ready for testing");
-//    }
 
     @org.junit.jupiter.api.Test
     void testCorrectCredentials() throws SQLException {
@@ -48,13 +41,4 @@ public class LoginTests extends Tests {
     void testNullPassword() throws SQLException {
         assertFalse(UA.loginUser("test",null));
     }
-
-//    @org.junit.jupiter.api.Test
-//    void testAddingAndCredentials() throws SQLException {
-//        assertFalse(SC.loginUser("yoni.4", "9999"));
-//        DB_handler.add_row("login", new String[]{"username", "password"}, new String[]{"yoni.4", "9999"});
-//        assertTrue(SC.loginUser("yoni.4", "9999"));
-//        DB_handler.remove_row("login", "username", "yoni.4");
-//        assertFalse(SC.loginUser("yoni.4", "9999"));
-//    }
 }

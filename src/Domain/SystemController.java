@@ -56,7 +56,7 @@ public class SystemController
 
         //Checks that the leagueID exists, that the referee_id exists, and that the referee is not already bounded to the given league
         if (DB_handler.existInDB("leagues",league_column, league_condition) & DB_handler.existInDB("referee", referee_column, referee_id_condition) &
-                !DB_handler.existInDB("referee", referee_in_league_column, referee_in_league_condition)){
+                !DB_handler.existInDB("referee_in_league", referee_in_league_column, referee_in_league_condition)){
 
             // Adds the referee to the league in the DB
             DB_handler.addRefereeToLeague(referee_ID,leagueId);

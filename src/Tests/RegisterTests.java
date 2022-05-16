@@ -12,7 +12,7 @@ public class RegisterTests extends Tests{
 
     @org.junit.jupiter.api.Test
     void testRegisterReferee() throws SQLException {
-        assertTrue(UA.addReferee("Ref1","6"));
+        assertTrue(UA.addReferee("1","1"));
     }
 
     @org.junit.jupiter.api.Test
@@ -29,6 +29,11 @@ public class RegisterTests extends Tests{
     @org.junit.jupiter.api.Test
     void testNullname() throws SQLException {
         assertFalse(UA.addReferee("Ref2",null));
+    }
+
+    @org.junit.jupiter.api.AfterAll
+    static void deleteChanges() throws SQLException {
+        DB_handler.remove_row("referee_in_league","referee_id","1");
     }
 
 
