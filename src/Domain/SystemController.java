@@ -33,6 +33,13 @@ public class SystemController
         if (DB_handler.checkLogin(userID, password)){
             connected_user = new User(userID,password);
              return true;
+
+
+            //connected_user.setConnection(true);
+
+            //TODO: add a "connection status" in the User table in the DB
+            //TODO: should check the "connection status" of the user first
+            //TODO: after creating the user object, connect him into the system.
         }
         return false;
     }
@@ -78,6 +85,7 @@ public class SystemController
             referee.add_league(league);
 
             return true;
+
         }
         return false;
     }
@@ -167,6 +175,12 @@ public class SystemController
                     // Add the game to the list of games in the league
                     league.add_game(game);
                     return true;
+
+                    // TODO: check that the referee isn't in another game at the same time
+                    // TODO: check that the homeTeam isn't in another game at the same time
+                    // TODO: check that the awayTeam isn't in another game at the same time
+
+
                 }
             }
         }
