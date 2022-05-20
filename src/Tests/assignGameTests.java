@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class assignTests extends Tests{
+public class assignGameTests extends Tests{
 
     @org.junit.jupiter.api.BeforeAll
     static void beforeAssignTests(){

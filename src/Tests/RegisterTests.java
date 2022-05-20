@@ -10,6 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegisterTests extends Tests{
 
+
+    @org.junit.jupiter.api.BeforeAll
+    static void beforeRegisterRefereeTests(){
+        DB_handler.connect_DB();
+        DB_handler.add_row("referee", new String[]{"referee_id", "referee_name"} ,new String[]{"1", "Hapoel"});
+        DB_handler.add_row("leagues", new String[]{"league_id", "season", "league_name", "number_of_teams"} ,new String[]{"1", "2020", "Lumit", "10"});}
+
     @org.junit.jupiter.api.Test
     void testRegisterReferee() throws SQLException {
         assertTrue(UA.addReferee("1","1"));
@@ -17,7 +24,7 @@ public class RegisterTests extends Tests{
 
     @org.junit.jupiter.api.Test
     void testWrongLeague() throws SQLException {
-        assertFalse(UA.addReferee("Ref2","7"));
+        assertFalse(UA.addReferee("Ref2","1"));
     }
 
 
@@ -34,7 +41,8 @@ public class RegisterTests extends Tests{
     @org.junit.jupiter.api.AfterAll
     static void deleteChanges() throws SQLException {
         DB_handler.remove_row("referee_in_league","referee_id","1");
+        DB_handler.remove_row("referee","referee_id","1");
+        DB_handler.remove_row("leagues","league_id","1");
     }
-
 
 }
