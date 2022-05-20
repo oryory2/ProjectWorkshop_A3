@@ -25,7 +25,8 @@ public class SystemController
     // Function that handles the loginUser call from the service layer
     public boolean loginUser(String userID, String password) throws SQLException
     {
-        if (userID == null || password == null){
+        if (userID == null || password == null)
+        {
             return false;
         }
 
@@ -47,47 +48,69 @@ public class SystemController
     // Function that handles the addReferee call from the service layer
     public boolean addReferee(String referee_ID, String leagueId)
     {
-        if (referee_ID == null || leagueId == null){
+        if (referee_ID == null || leagueId == null)
+        {
             return false;
         }
 
-        // Prepares all the column names and condition strings we will use
-        String[] league_column = {"league_id"};
-        String league_condition =   "league_id == '" + leagueId +"'";
-
-        String[] referee_column = {"referee_id"};
-        String referee_id_condition = "referee_id == '" + referee_ID + "'";
-
-        String[] referee_in_league_column = {"referee_id", "league_id"};
-        String referee_in_league_condition = "referee_id == '" + referee_ID + "' AND league_id == '" + leagueId + "'";
-
         //Checks that the leagueID exists, that the referee_id exists, and that the referee is not already bounded to the given league
-        if (DB_handler.existInDB("leagues",league_column, league_condition) & DB_handler.existInDB("referee", referee_column, referee_id_condition) &
-                !DB_handler.existInDB("referee_in_league", referee_in_league_column, referee_in_league_condition)){
-
+        if((League.isLeagueExist(leagueId)) && Referee.isRefereeExist(referee_ID) && (!Referee.isRefereeExistInLeague(referee_ID, leagueId)))
+        {
             // Adds the referee to the league in the DB
             DB_handler.addRefereeToLeague(referee_ID,leagueId);
 
             //Creates a referee instance
-            String referee_name = (String) DB_handler.get_list("referee", new String[] {"referee_name"}, referee_id_condition).get(0).get(0);
-            Referee referee = new Referee(referee_ID, referee_name,leagueId);
+            Referee referee = new Referee(referee_ID, Referee.getRefereeName(referee_ID),leagueId);
 
-            //Creates a league instance
-            String conditionLeague = "league_id == '" + leagueId +"'";
-            ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams"},conditionLeague);
-            String leagueSeason = (String) leagueDetails.get(0).get(0);
-            String leagueName = (String) leagueDetails.get(0).get(1);
-            String leagueNumOfTeam = (String) leagueDetails.get(0).get(2);
-            League league = new League(leagueId, leagueName, leagueSeason, leagueNumOfTeam);
+            //Adds the referee to the league and the league to the referee
+            ArrayList<String> leagueParams = League.getLeagueParams(leagueId);
+            League league = new League(leagueId, leagueParams.get(1), leagueParams.get(0), leagueParams.get(2));
 
             //Adds the referee to the league and the league to the referee
             league.add_referee(referee);
             referee.add_league(league);
 
             return true;
-
         }
         return false;
+
+//        // Prepares all the column names and condition strings we will use
+//        String[] league_column = {"league_id"};
+//        String league_condition =   "league_id == '" + leagueId +"'";
+//
+//        String[] referee_column = {"referee_id"};
+//        String referee_id_condition = "referee_id == '" + referee_ID + "'";
+//
+//        String[] referee_in_league_column = {"referee_id", "league_id"};
+//        String referee_in_league_condition = "referee_id == '" + referee_ID + "' AND league_id == '" + leagueId + "'";
+//
+//        //Checks that the leagueID exists, that the referee_id exists, and that the referee is not already bounded to the given league
+//        if (DB_handler.existInDB("leagues",league_column, league_condition) & DB_handler.existInDB("referee", referee_column, referee_id_condition) &
+//                !DB_handler.existInDB("referee_in_league", referee_in_league_column, referee_in_league_condition)){
+//
+//            // Adds the referee to the league in the DB
+//            DB_handler.addRefereeToLeague(referee_ID,leagueId);
+//
+//            //Creates a referee instance
+//            String referee_name = (String) DB_handler.get_list("referee", new String[] {"referee_name"}, referee_id_condition).get(0).get(0);
+//            Referee referee = new Referee(referee_ID, referee_name,leagueId);
+//
+//            //Creates a league instance
+//            String conditionLeague = "league_id == '" + leagueId +"'";
+//            ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams"},conditionLeague);
+//            String leagueSeason = (String) leagueDetails.get(0).get(0);
+//            String leagueName = (String) leagueDetails.get(0).get(1);
+//            String leagueNumOfTeam = (String) leagueDetails.get(0).get(2);
+//            League league = new League(leagueId, leagueName, leagueSeason, leagueNumOfTeam);
+//
+//            //Adds the referee to the league and the league to the referee
+//            league.add_referee(referee);
+//            referee.add_league(league);
+//
+//            return true;
+//
+//        }
+//        return false;
     }
 
     // Function that handles the assignGame call from the service layer

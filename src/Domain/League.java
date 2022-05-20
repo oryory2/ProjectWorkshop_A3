@@ -1,5 +1,7 @@
 package Domain;
 
+import DataAccess.DB_handler;
+
 import java.util.ArrayList;
 
 // Class that represents a League
@@ -61,6 +63,25 @@ public class League {
     public void add_game(Game game_to_add)
     {
         this.list_of_games.add(game_to_add);
+    }
+
+    public static boolean isLeagueExist(String leagueId)
+    {
+        // Prepares all the column names and condition strings we will use
+        String[] league_column = {"league_id"};
+        String league_condition =   "league_id == '" + leagueId +"'";
+        return DB_handler.existInDB("leagues",league_column, league_condition);
+    }
+
+    public static ArrayList<String> getLeagueParams(String leagueId)
+    {
+        ArrayList<String> paramsArr = new ArrayList<>();
+        String conditionLeague = "league_id == '" + leagueId +"'";
+        ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams"},conditionLeague);
+        paramsArr.add((String) leagueDetails.get(0).get(0)); // League Season
+        paramsArr.add((String) leagueDetails.get(0).get(1)); // League Name
+        paramsArr.add((String) leagueDetails.get(0).get(2)); // League Number of teams
+        return paramsArr;
     }
 }
 
