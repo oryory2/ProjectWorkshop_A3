@@ -7,7 +7,7 @@ import java.sql.SQLException;
 // Class that represents the user application in the Service Layer. It handles inputs from the user and pass them to the Domain layer.
 public class UserApplication {
 
-    SystemController SC = new SystemController();
+    SystemController SC = SystemController.getInstance();
 
     // Function that handles a loginUser operation
     public boolean loginUser(String iUserName, String iPassword) throws SQLException {
