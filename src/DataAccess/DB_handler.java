@@ -68,6 +68,27 @@ public class DB_handler {
         add_row("games", column_names, values);
     }
 
+    // Function that adds a new team to the DB
+    public static void add_team(String team_id, String team_name, String league_id,String field_name) {
+        if (team_id == null || team_name == null || league_id == null || field_name == null ){
+            return;
+        }
+        String[] column_names = {"team_id", "team_name", "league_id", "field_name"};
+        String[] values = {team_id,team_name,league_id,field_name};
+        add_row("teams", column_names, values);
+    }
+
+
+    // Function that adds a new referee to the DB
+    public static void add_referee(String refereeID, String refereeName) {
+        if (refereeID== null ||refereeName == null ){
+            return;
+        }
+        String[] column_names = {"referee_id", "referee_name"};
+        String[] values = {refereeID,refereeName};
+        add_row("referee", column_names, values);
+    }
+
     // Generic function that Inserts a row to a table in the DB
     public static void add_row(String table, String[] column_names, String[] value_names){
         try{
@@ -192,5 +213,7 @@ public class DB_handler {
         }
 
     }
+
+
 
 }
