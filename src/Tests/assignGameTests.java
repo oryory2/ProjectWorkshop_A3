@@ -13,8 +13,8 @@ public class assignGameTests extends Tests{
     @org.junit.jupiter.api.BeforeAll
     static void beforeAssignTests(){
         DB_handler.add_league("2020","Champions","10");
-        DB_handler.add_referee("1","or");
-        DB_handler.add_team("maccabi","1","Blumfield");
+//        DB_handler.add_referee("1","or");
+//        DB_handler.add_team("maccabi","1","Blumfield");
     }
 
 

@@ -17,13 +17,12 @@ public class LoginTests extends Tests {
     @org.junit.jupiter.api.BeforeAll
     static void beforeLoginTests(){
         DB_handler.connect_DB();
-        DB_handler.add_row("login", new String[]{"username", "password"} ,new String[]{"amit", "1234"});}
+        DB_handler.add_row("login", new String[]{"username", "password"} ,new String[]{"amit", "12345678"});}
 
     @org.junit.jupiter.api.Test
     void testCorrectCredentials() throws SQLException {
-        assertTrue(UA.loginUser("amit","1234"));
+        assertTrue(UA.loginUser("amit","12345678"));
     }
-
 
     @org.junit.jupiter.api.Test
     void testWrongUsername() throws SQLException {
@@ -33,6 +32,11 @@ public class LoginTests extends Tests {
     @org.junit.jupiter.api.Test
     void testWrongPassword() throws SQLException {
         assertFalse(UA.loginUser("amit","12345"));
+    }
+
+    @org.junit.jupiter.api.Test
+    void testNullPasswordWithExistUserName() throws SQLException {
+        assertFalse(UA.loginUser("amit",null));
     }
 
     @org.junit.jupiter.api.Test
