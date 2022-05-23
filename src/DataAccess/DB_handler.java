@@ -135,6 +135,18 @@ public class DB_handler {
         }
     }
 
+    public static void deleteFromSQLSequence(){
+        try{
+
+        String sql = "DELETE FROM sqlite_sequence";
+        System.out.println(sql);
+        Statement statement = conn.createStatement();
+        statement.executeUpdate(sql);
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
     // Generic function that returns a Boolean value if a certain row exists in the DB (using a given condition)
     // Parameter condition is the condition that comes after 'WHERE' in sql query. If no condition, enter null.
     public static boolean existInDB(String table, String[] columns_name, String condition){
@@ -187,6 +199,7 @@ public class DB_handler {
         }
         return result;
     }
+
 
 
     // Function that gets the last row that was added to a table (if the table contains an autoincrement ID)

@@ -18,8 +18,25 @@ public class UnitTests extends Tests{
         DB_handler.connect_DB();
         DB_handler.add_league("2020","Champions","10");
         DB_handler.add_referee("1","or");
+        DB_handler.addRefereeToLeague("1","1");
         DB_handler.add_team("1","maccabi","1","Blumfield");
+        DB_handler.add_team("2","Hapoel","1","Blumfield");
+        DB_handler.addGame("1","2","1","19/06/2022","1");
+
+}
+
+    @org.junit.jupiter.api.AfterAll
+    static void deleteChangesUnitTests() throws SQLException {
+        DB_handler.remove_row("referee_in_league","referee_id","1");
+        DB_handler.remove_row("games","game_id","1");
+        DB_handler.remove_row("referee","referee_id","1");
+        DB_handler.remove_row("teams","team_id","1");
+        DB_handler.remove_row("teams","team_id","2");
+        DB_handler.remove_row("leagues","league_id","1");
+        DB_handler.deleteFromSQLSequence();
+
     }
+
 
     /**
      * Tests for IsRefereeExist function
