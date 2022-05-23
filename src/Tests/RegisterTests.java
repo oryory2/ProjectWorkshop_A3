@@ -19,6 +19,14 @@ public class RegisterTests extends Tests{
         DB_handler.add_row("referee", new String[]{"referee_id", "referee_name"} ,new String[]{"1", "Maxim"});
         DB_handler.add_row("leagues", new String[]{"league_id", "season", "league_name", "number_of_teams"} ,new String[]{"1", "2020", "Super", "10"});}
 
+    @org.junit.jupiter.api.AfterAll
+    static void deleteChangesRegisterRefereeTests() throws SQLException {
+        DB_handler.remove_row("referee","referee_id","1");
+        DB_handler.remove_row("leagues","league_id","1");
+        DB_handler.deleteFromSQLSequence();
+
+    }
+
     @org.junit.jupiter.api.Test
     void testRegisterReferee() throws SQLException {
         assertTrue(UA.addReferee("1","1"));

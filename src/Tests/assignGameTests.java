@@ -17,6 +17,15 @@ public class assignGameTests extends Tests{
         DB_handler.add_team("1","maccabi","1","Blumfield");
     }
 
+    @org.junit.jupiter.api.AfterAll
+    static void deleteChangesUnitTests() throws SQLException {
+        DB_handler.remove_row("referee","referee_id","1");
+        DB_handler.remove_row("teams","team_id","1");
+        DB_handler.remove_row("leagues","league_id","1");
+        DB_handler.deleteFromSQLSequence();
+
+    }
+
 
     @org.junit.jupiter.api.Test
     void testAssignGame() throws SQLException {
