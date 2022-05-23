@@ -21,7 +21,7 @@ public class UnitTests extends Tests{
         DB_handler.addRefereeToLeague("1","1");
         DB_handler.add_team("1","maccabi","1","Blumfield");
         DB_handler.add_team("2","Hapoel","1","Blumfield");
-        DB_handler.addGame("1","2","1","19/06/2022","1");
+        DB_handler.addGame("1","2","1","2022-09-02 11:13:22.002","1");
 
 }
 
@@ -193,22 +193,22 @@ public class UnitTests extends Tests{
      */
     @org.junit.jupiter.api.Test
     void testIsRefereeAvailableTrue() throws SQLException {
-        assertTrue(SC.isRefereeAvailable("1","18/6/2022"));
+        assertTrue(SC.isRefereeAvailable("1","2022-10-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
     void testIsRefereeAvailableFalse1() throws SQLException {
-        assertTrue(SC.isRefereeAvailable("1","18/6/1999"));
+        assertFalse(SC.isRefereeAvailable("1","2022-09-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
-    void testIsRefereeAvailableFalse2() throws SQLException {
-        assertTrue(SC.isRefereeAvailable("2","18/6/2022"));
+    void testIsRefereeAvailableTrue2() throws SQLException {
+        assertTrue(SC.isRefereeAvailable("2","2022-09-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
     void testIsRefereeAvailableNull1() throws SQLException {
-        assertTrue(SC.isRefereeAvailable(null,"18/6/2022"));
+        assertTrue(SC.isRefereeAvailable(null,"2022-09-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
@@ -221,18 +221,18 @@ public class UnitTests extends Tests{
      */
 
     @org.junit.jupiter.api.Test
-    void testIsTeamAvailableTrue() throws SQLException {
-        assertTrue(SC.isTeamAvailable("1","18/6/2022"));
+    void testIsTeamAvailableFalse() throws SQLException {
+        assertFalse(SC.isTeamAvailable("1","2022-09-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
-    void testIsTeamAvailableFalse() throws SQLException {
-        assertTrue(SC.isTeamAvailable("1","18/6/1999"));
+    void testIsTeamAvailableTrue() throws SQLException {
+        assertTrue(SC.isTeamAvailable("1","2022-01-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
     void testIsTeamAvailableNull1() throws SQLException {
-        assertTrue(SC.isTeamAvailable(null,"18/6/2022"));
+        assertTrue(SC.isTeamAvailable(null,"2022-09-02 11:13:22.002"));
     }
 
     @org.junit.jupiter.api.Test
