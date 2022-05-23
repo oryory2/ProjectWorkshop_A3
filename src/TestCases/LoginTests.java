@@ -1,4 +1,4 @@
-package Tests;
+package TestCases;
 
 import DataAccess.DB_handler;
 import Domain.Game;
@@ -22,6 +22,7 @@ public class LoginTests extends Tests {
     @org.junit.jupiter.api.AfterAll
     static void afterLoginTests() throws SQLException {
         DB_handler.remove_row("login","username","amit");
+        DB_handler.disconnect_DB();
     }
 
     @org.junit.jupiter.api.Test
