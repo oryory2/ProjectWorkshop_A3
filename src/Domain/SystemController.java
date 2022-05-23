@@ -141,13 +141,21 @@ public class SystemController
         Matcher matcher = regex.matcher(dateAndTime);
 
         // If pattern is correct
-        if (matcher.find())
+        // TODO: need to remove !
+        if (!matcher.find())
         {
             // Checks that home team and visitor team actually exists in the DB
             // Checks that the league_id exists in the DB
             // Checks that the referee_id exists in the DB
             // Checks that the referee_id and the league_id exists in the referee_in_league table (that means referee is already associated with this league) in the DB
             // Checks that this game (same home team, same visitor team, same league) doesn't already exist in the DB
+
+            boolean bla = isLeagueExist(leagueIdOfTheGame);
+            boolean A = isTeamExist(homeTeam_id) && isTeamExist(visitorTeam_id) && isLeagueExist(leagueIdOfTheGame);
+            boolean B = isRefereeExist(referee_id) && isRefereeExistInLeague(referee_id, leagueIdOfTheGame);
+            boolean C = !isGameExistInLeague(homeTeam_id, visitorTeam_id, leagueIdOfTheGame);
+            boolean D = isRefereeAvailable(referee_id, dateAndTime) && isTeamAvailable(homeTeam_id, dateAndTime) && isTeamAvailable(visitorTeam_id, dateAndTime);
+
             if(isTeamExist(homeTeam_id) && isTeamExist(visitorTeam_id) && isLeagueExist(leagueIdOfTheGame)
                     && isRefereeExist(referee_id) && isRefereeExistInLeague(referee_id, leagueIdOfTheGame)
                     && !isGameExistInLeague(homeTeam_id, visitorTeam_id, leagueIdOfTheGame)
@@ -355,7 +363,7 @@ public class SystemController
         String table = "games";
         String[] columns_name = {"referee_id", "game_datetime"};
         String condition = "refereee_id == " + referee_id + " AND game_datetime == '" + date + "'";
-        return DB_handler.existInDB(table, columns_name, condition);
+        return !DB_handler.existInDB(table, columns_name, condition);
     }
 
     // Helper function that checks if a team is already assigned to a game on the given date
@@ -364,7 +372,7 @@ public class SystemController
         String table = "games";
         String[] columns_name = {"home_team_id", "visitor_team_id", "game_datetime"};
         String condition = "(home_team_id == " + team_id + " OR visitor_team_id == " + team_id + ") AND game_datetime == '" + date + "'";
-        return DB_handler.existInDB(table, columns_name, condition);
+        return !DB_handler.existInDB(table, columns_name, condition);
     }
 
 }
