@@ -288,7 +288,11 @@ public class SystemController
     {
         String[] referee_column = {"referee_id"};
         String referee_id_condition = "referee_id == '" + referee_ID + "'";
-        return (String) DB_handler.get_list("referee", new String[] {"referee_name"}, referee_id_condition).get(0).get(0);
+        ArrayList<ArrayList> refereeDetails =  DB_handler.get_list("referee", new String[] {"referee_name"}, referee_id_condition);
+        if (refereeDetails.size() == 0){
+            return null;
+        }
+        return (String) refereeDetails.get(0).get(0);
     }
 
     // Function that check if the League exist in the DB
@@ -306,6 +310,9 @@ public class SystemController
         ArrayList<String> paramsArr = new ArrayList<>();
         String conditionLeague = "league_id == '" + leagueId +"'";
         ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams"},conditionLeague);
+        if (leagueDetails.size() == 0){
+            return null;
+    }
         paramsArr.add((String) leagueDetails.get(0).get(0)); // League Season
         paramsArr.add((String) leagueDetails.get(0).get(1)); // League Name
         paramsArr.add((String) leagueDetails.get(0).get(2)); // League Number of teams

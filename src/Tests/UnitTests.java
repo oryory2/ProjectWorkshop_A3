@@ -112,12 +112,12 @@ public class UnitTests extends Tests{
 
     @org.junit.jupiter.api.Test
     void testIsLeagueExistFalse() throws SQLException {
-        assertTrue(SC.isLeagueExist("2"));
+        assertFalse(SC.isLeagueExist("2"));
     }
 
     @org.junit.jupiter.api.Test
     void testIsLeagueExistNull() throws SQLException {
-        assertTrue(SC.isLeagueExist(null));
+        assertFalse(SC.isLeagueExist(null));
     }
 
 
