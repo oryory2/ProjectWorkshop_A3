@@ -13,7 +13,7 @@ public class UnitTests extends Tests{
     private static SystemController SC;
 
     @org.junit.jupiter.api.BeforeAll
-    static void beforeRegisterRefereeTests(){
+    static void beforeUnitTests(){
         SC = SystemController.getInstance();
         DB_handler.connect_DB();
         DB_handler.add_league("2020","Champions","10");
