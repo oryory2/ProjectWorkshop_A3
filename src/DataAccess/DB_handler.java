@@ -47,14 +47,14 @@ public class DB_handler {
         }
 
     // Function that adds a new league to the DB
-    public static void add_league(String season, String league_name, String number_of_teams)
+    public static void add_league(String season, String league_name, String number_of_teams,String score_policy, String assign_policy)
     {
         if (season == null || league_name == null)
         {
             return;
         }
-        String[] column_names = {"season", "league_name", "number_of_teams"};
-        String[] values = {season, league_name, number_of_teams};
+        String[] column_names = {"season", "league_name", "number_of_teams", "score_policy", "assign_policy"};
+        String[] values = {season, league_name, number_of_teams, score_policy, assign_policy};
         add_row("leagues", column_names, values);
     }
 

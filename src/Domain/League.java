@@ -10,15 +10,20 @@ public class League {
     private String league_name;
     private String season;
     private String number_of_teams;
+    private String score_policy;
+    private  String assign_policy;
     private ArrayList<Referee> list_of_referees;
     private ArrayList<Game> list_of_games;
 
+
     // Constructor
-    public League(String league_id, String league_name, String season, String number_of_teams) {
+    public League(String league_id, String league_name, String season, String number_of_teams, String score_policy, String assign_policy) {
         this.league_id = league_id;
         this.league_name = league_name;
         this.season = season;
         this.number_of_teams = number_of_teams;
+        this.score_policy = score_policy;
+        this.assign_policy = assign_policy;
         this.list_of_referees = new ArrayList<Referee>();
         this.list_of_games = new ArrayList<Game>();
     }
@@ -63,6 +68,21 @@ public class League {
     public void add_game(Game game_to_add)
     {
         this.list_of_games.add(game_to_add);
+    }
+    public String getScore_policy() {
+        return score_policy;
+    }
+
+    public void setScore_policy(String score_policy) {
+        this.score_policy = score_policy;
+    }
+
+    public String getAssign_policy() {
+        return assign_policy;
+    }
+
+    public void setAssign_policy(String assign_policy) {
+        this.assign_policy = assign_policy;
     }
 }
 

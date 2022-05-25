@@ -16,7 +16,7 @@ public class UnitTests extends Tests{
     static void beforeUnitTests(){
         SC = SystemController.getInstance();
         DB_handler.connect_DB();
-        DB_handler.add_league("2020","Champions","10");
+        DB_handler.add_league("2020","Champions","10", "A", "A");
         DB_handler.add_referee("1","or");
         DB_handler.addRefereeToLeague("1","1");
         DB_handler.add_team("1","maccabi","1","Blumfield");
@@ -130,6 +130,8 @@ public class UnitTests extends Tests{
             add("2020");
             add("Champions");
             add("10");
+            add("A");
+            add("A");
         }};
         assertEquals(SC.getLeagueParams("1"),leaguePresent);
     }

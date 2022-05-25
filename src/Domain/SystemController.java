@@ -74,7 +74,7 @@ public class SystemController
 
             //Construct the League
             ArrayList<String> leagueParams = getLeagueParams(leagueId);
-            League league = new League(leagueId, leagueParams.get(1), leagueParams.get(0), leagueParams.get(2));
+            League league = new League(leagueId, leagueParams.get(1), leagueParams.get(0), leagueParams.get(2),  leagueParams.get(3),  leagueParams.get(4));
 
             //Adds the referee to the league and the league to the referee
             league.add_referee(referee);
@@ -170,7 +170,7 @@ public class SystemController
 
                     // Constructs the league
                     ArrayList<String> leagueParams = getLeagueParams(leagueIdOfTheGame);
-                    League league = new League(leagueIdOfTheGame, leagueParams.get(1), leagueParams.get(0), leagueParams.get(2));
+                    League league = new League(leagueIdOfTheGame, leagueParams.get(1), leagueParams.get(0), leagueParams.get(2), leagueParams.get(3), leagueParams.get(4));
 
                     // Constructs the Home Team.
                     Team homeTeam = new Team(homeTeamDetails.get(0),homeTeam_id,league,homeTeamDetails.get(2));
@@ -314,13 +314,16 @@ public class SystemController
     {
         ArrayList<String> paramsArr = new ArrayList<>();
         String conditionLeague = "league_id == '" + leagueId +"'";
-        ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams"},conditionLeague);
+        ArrayList<ArrayList> leagueDetails = DB_handler.get_list("leagues",new String[] {"season","league_name","number_of_teams", "score_policy", "assign_policy"},conditionLeague);
         if (leagueDetails.size() == 0){
             return null;
     }
         paramsArr.add((String) leagueDetails.get(0).get(0)); // League Season
         paramsArr.add((String) leagueDetails.get(0).get(1)); // League Name
         paramsArr.add((String) leagueDetails.get(0).get(2)); // League Number of teams
+        paramsArr.add((String) leagueDetails.get(0).get(3)); // League score_policy
+        paramsArr.add((String) leagueDetails.get(0).get(4)); // League assign_policy
+
         return paramsArr;
     }
 
@@ -349,9 +352,24 @@ public class SystemController
     // Function that check if the Game exist in the League in the DB
     public boolean isGameExistInLeague(String homeTeam_id, String visitorTeam_id, String leagueIdOfTheGame)
     {
-        String[] columnGame = {"home_team_id", "visitor_team_id", "league_id"};
-        String conditionGame = "home_team_id == '" + homeTeam_id + "' AND visitor_team_id == '" + visitorTeam_id + "' AND league_id == '" + leagueIdOfTheGame + "'";
-        return DB_handler.existInDB("games", columnGame, conditionGame);
+        ArrayList<ArrayList> assign_policy_list =  DB_handler.get_list("leagues",new String[]{"assign_policy"}, "league_id == '" + leagueIdOfTheGame + "'");
+        if (assign_policy_list.size() == 0){ return false;}
+
+        else {
+            String assign_policy = assign_policy_list.get(0).get(0).toString();
+
+            if (assign_policy.equals("A")) { // Policy 'A' means every team plays 2 games against each team - one at home and one at the opponent's home
+                String[] columnGame = {"home_team_id", "visitor_team_id", "league_id"};
+                String conditionGame = "home_team_id == '" + homeTeam_id + "' AND visitor_team_id == '" + visitorTeam_id + "' AND league_id == '" + leagueIdOfTheGame + "'";
+                return DB_handler.existInDB("games", columnGame, conditionGame);
+            } else { // Policy 'B' means every team plays only a single game against each team
+                String[] columnGame = {"home_team_id", "visitor_team_id", "league_id"};
+                String conditionGame1 = "home_team_id == '" + homeTeam_id + "' AND visitor_team_id == '" + visitorTeam_id + "' AND league_id == '" + leagueIdOfTheGame + "'";
+                String conditionGame2 = "home_team_id == '" + visitorTeam_id + "' AND visitor_team_id == '" + homeTeam_id + "' AND league_id == '" + leagueIdOfTheGame + "'";
+                return DB_handler.existInDB("games", columnGame, conditionGame1) || DB_handler.existInDB("games", columnGame, conditionGame2);
+            }
+        }
+
     }
 
     // Helper function that checks if a referee is already assigned to a game on the given date
